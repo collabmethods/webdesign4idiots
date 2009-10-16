@@ -38,7 +38,9 @@
     </div>
     <div id="fakeWrapper">
       <ul id="breadcrumbs">
-        <li><?php echo anchor('site/index', 'home'); ?> \ all posts</li>
+        <?php foreach ($breadcrumb as $value): ?>
+        <?php echo $value; ?>
+        <?php endforeach; ?>
       </ul>
       <div id="wrapper">
 
