@@ -1,0 +1,68 @@
+*
+{
+	text-decoration:none;
+	font-size:1em;
+	outline:none;
+	margin:0;
+	padding:0;
+}
+
+code,kbd,samp,pre,tt,var,input,select,isindex,listing,xmp,plaintext
+{
+	font:inherit;
+	white-space:normal;
+}
+
+textarea
+{
+	font:inherit;
+}
+
+a,img,a img,iframe,form,abbr,acronym,object,applet,table,a abbr,a acronym
+{
+	border-width:0;
+}
+
+dfn,i,cite,var,address,em
+{
+	font-style:normal;
+}
+
+th,b,strong,h1,h2,h3,h4,h5,h6,dt
+{
+	font-weight:normal;
+}
+
+caption,th,td
+{
+	text-align:left;
+}
+
+html
+{
+	font-family:arial, sans-serif;
+}
+
+/* \*/
+
+/* */
+
+q
+{
+	quotes:"\201C""\201D""\2018""\2019";
+}
+
+ul,ol,dir,menu
+{
+	list-style:none;
+}
+
+sub,sup
+{
+	vertical-align:baseline;
+}
+
+a
+{
+	color:inherit;
+}

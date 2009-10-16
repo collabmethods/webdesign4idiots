@@ -1,0 +1,65 @@
+body {background: #1D1714 url('../images/body_bg.jpg') repeat-x;}
+
+a {color: #3B75AF;}
+
+a:hover,
+a:active {color: #0986C8;}
+
+a:visited {color: #48AF36;}
+
+
+#fakeWrapper {
+  margin: 0 auto;
+  width: 980px;
+}
+
+#wrapper {
+  float: left;
+  margin: 50px 0 0 0;
+  width: 960px;
+  background: #fff;
+  border: 2px solid #0986C8;
+}
+
+/* STANDARD CLASSES */
+.green a {background: #48AF36 !important;}
+.green a:hover {background: #55CF40 !important;}
+.green .active {background: #55CF40 !important;}
+
+/* Top Navigation */
+#top-nav {float: left;padding: 5px 0;width: 100%;background: url('../images/black_bg.png') repeat;border-top: 4px solid #0986C8;}
+#top-nav ul {float: left;margin: 0 0 0 330px;padding: 5px 0;}
+#top-nav ul li {float: left;margin: 0 10px 0 0;}
+#top-nav ul li a {float: left;padding: 2px 8px;color: #fff;text-transform: uppercase;background: url('../images/blue_bg.png');-moz-border-radius: 5px;}
+#top-nav ul li a:hover {background: #0986C8;}
+#top-nav ul li .active {background: #0986C8;}
+
+/* BreadCrumb Styling */
+#breadcrumbs {clear: both;float: left;margin: 0 0 5px 0;padding: 0 0 0 10px;width: 98%;background: #EFEFEF;border-bottom: 1px solid #dfdfdf;}
+#breadcrumbs li {float: left;margin: 0 5px 0 0;}
+
+/* This is the main content area */
+#mainContent {float: left;width: 720px;}
+
+/* Post Styles */
+.post-container {clear: both;float: left;position: relative;padding: 10px;}
+.post-container h2 {float: left;margin: 0 0 5px 0;width: 700px;}
+.post-container h2 a {color: #27221F;font-family: Helvetica;font-size: 25px;font-weight: bold;}
+.post-container h2 a:hover {text-decoration: underline;}
+.post-container p {clear: both;float: left;}
+.post-container img {float: left;}
+
+/* Post Link Styles */
+.meta-data {float: left;margin: 15px 0 0 0;padding: 2px 8px;color: #fff;background: #009AEF;}
+.read-more {float: left;margin: 10px 0 0 0;padding: 2px 8px;color: #3B75AF;font-size: 14px;}
+
+.post {clear: both;float: left;margin: 30px 0 0 0;padding: 0 0 40px 0;width: 705px;border-bottom: 1px solid #dfdfdf;}
+.post img {float: left;padding: 5px;border: 1px solid #DBDADA;}
+.post p {clear: none !important;margin: 0 0 0 10px;width: 480px;}
+
+.cloud-comment {position: absolute;top: 10px;right: 12px;float: right;padding: 10px;width: 62px;height: 62px;background: url('../images/cloud_comment.png') no-repeat;}
+.cloud-comment span {float: left;margin: 3px 0 0 0;width: 90%;text-align: center;color: #fff;font-size: 23px;}
+
+/* This is the content for the right sidebar */
+#sideContent {float: right;width: 230px;height: 806px;border-left: 1px solid #9F9F9F;background: #cfcfcf;}
+#sideContent p {float: left;padding: 0 10px;}
