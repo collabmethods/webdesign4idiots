@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/tyography.css" type="text/css" media="screen" charset="utf-8" />
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/css/xcss/"></script>
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/master.css" type="text/css" media="screen" charset="utf-8" />
-    <script src="<?php echo base_url(); ?>assets/js/prototype.js" type="text/javascript" charset="utf-8"></script>
-    <script src="<?php echo base_url(); ?>assets/js/scriptaculous.js" type="text/javascript" charset="utf-8"></script>
     <meta name="name" content="content" charset="utf-8">
   </head>
   <body>
