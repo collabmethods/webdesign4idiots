@@ -1,163 +1,57 @@
 <?php  if (!defined('APPPATH')) exit('No direct script access allowed');
-/**
- * Breadcrumb Class
+
+session_start();
+
+/*
+ * @Author: Dean Ericson
+ * @Email: mail@deanericson.com
  *
- * Parses URIs and returns Breadcrumb with option to exclude segments
- * It is also possible to set an optional first crumb in the chain
- * 
- * for php5
- *
- * @package Code Ignitor
- * @subpackage Libraries
- * @name Breadcrumb
- * @version Breadcrumb v0.2
- * @copyright Copyright (c) 2006, Holger Lampe
  */
-class Breadcrumb
-{
-    private $obj;
-    public $breadcrumb = array();
-    public $delimiter = '&raquo;';
-    public $exclude = array();
-    public $first_crumb = '';
-    private $base = '';
-    private $segments = '';
 
-    /**
-     * Constructor - Sets Breadcrumb Preferences
-     *
-     * The constructor can be passed an array of config values
-     *
-     * @access public
-     */
-    public function __construct($config = array())
-    {
-        $this->obj =& get_instance();
-        if ( count($config) > 0 )
-        {
-            $this->initialize($config);
-        }
-    }
+final class BreadCrumb{
+	private $title;
+	private $url;
+	private $isRoot;
 
-    /**
-	 * Initialize Preferences
-	 *
-	 * @access	public
-	 * @param	array $config
-	 * @return	void
+	/*
+	 * No need to set anything up.  I autoload it and
+	 * let the setters mutate the properties through the
+	 * setBreadCrumb function
 	 */
-    private function initialize($config = array())
-    {
-        foreach ( $config as $key => $val ) {
-            $method = 'set'.$key;
-            if ( method_exists($this, $method) )
-            {
-                $this->$method($val);
-            }
-        }
-    }
+	function BreadCrumb(){}
 
-    /**
-     * Set Breadcrumb Delimiter
-     *
-     * @access public
-     * @param string $delimiter
-     * @return void
-     */
-    public function setDelimiter($delimiter = '&raquo;')
-    {
-        $this->delimiter = $delimiter;
-    }
+	/*
+	 * Takes an array which represents this class (BreadCrumb)
+	 * as a parameter. Sets the class through it mutators,
+	 * then sets itself within the BreadCrumbList Object.
+	 */
+	function setBreadCrumb($bcObjArr){
+		$this->title=$bcObjArr['title'];
+		$this->url=$bcObjArr['url'];
+		$this->isRoot=$bcObjArr['isRoot'];
 
-    /**
-     * Set First Crumb
-     *
-     * @access public
-     * @param string $first_crumb
-     * @return void
-     */
-    public function setFirstCrumb($first_crumb = '')
-    {
-        $this->first_crumb = $first_crumb;
-    }
+		$CI =& get_Instance();
+		$CI->breadcrumblist->add($this);
+		$_SESSION['breadCrumbList'] = $CI->breadcrumblist->getBreadCrumbs();
+	}
 
-    /**
-     * Set Segments To Exclude
-     *
-     * @access public
-     * @param array $exclude
-     * @return void
-     */
-    public function setExcludeSegments($exclude = array())
-    {
-        $this->exclude = $exclude;
-    }
-
-    /**
-     * Generates Breadcrumb
-     *
-     * @access public
-     * @param array $exclude segments to exclude
-     * @param bool $routed
-     * @return array
-     */
-    public function generate($routed = false)
-    {
-        $this->segments = $this->getSegments($routed);
-
-        if ( ! empty($this->first_crumb )) {
-            array_unshift($this->segments, $this->segments[1]);
-            $this->segments[1] = $this->first_crumb;
-            $this->segments = array_unique($this->segments);
-        } else {
-            $this->segments = array_merge($this->segments);
-        }
-
-        for ( $i = 0; $i < count($this->segments); $i++ ) {
-            if ($this->first_crumb && $i > 1) {
-                $this->base = preg_replace('/'.$this->first_crumb.'\/?/', '', $this->base);
-            }
-
-            if ( ! in_array($this->segments[$i], $this->exclude )) {
-                if ( $i < $this->getEndKey($this->segments )) {
-                    $delimiter = $this->delimiter;
-                } else {
-                    $delimiter = '';
-                }
-                $this->breadcrumb[] = anchor($this->base.$this->segments[$i], ucwords($this->segments[$i]))  . ' ' . $delimiter . ' ';
-            }
-            $this->base .= $this->segments[$i].'/';
-        }
-        return $this->breadcrumb;
-    }
-
-    /**
-     * Fetch The (Routed) URI Segments
-     *
-     * @access private
-     * @param bool $routed
-     * @return array
-     */
-    private function getSegments($routed)
-    {
-        if ( ! $routed ) {
-            return $this->obj->uri->segment_array();
-        } else {
-            return $this->obj->uri->rsegment_array();
-        }
-    }
-
-    /**
-     * Get Last Element Key
-     *
-     * @access  private
-     * @param array $array
-     * @return mixed
-     */
-    private function getEndKey($array)
-    {
-        end($array);
-        return key($array);
-    }
+	function getTitle(){
+		return $this->title;
+	}
+	function setTitle($t){
+		$this->title=$t;
+	}
+	function getUrl(){
+		return $this->url;
+	}
+	function setUrl($u){
+		$this->url=$u;
+	}
+	function isRoot(){
+		return $this->isRoot;
+	}
+	function setIsRoot($r){
+		$this->isRoot=$r;
+	}
 }
 ?>

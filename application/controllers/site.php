@@ -5,17 +5,12 @@
     function Blog()
     {
       parent::Controller();
-      
-      $this->breadcrumb->setDelimiter('>'); // Optional
     }
     
     function index()
     {
       $this->load->model('data_model');
       $this->load->model('system_functions');
-      
-      $data['breadcrumb'] = $this->breadcrumb->generate();
-      $data['page'] = 'one';
       
       if($query = $this->data_model->get_posts())
       {
@@ -48,7 +43,6 @@
     {
       $this->load->model('data_model');
       $this->load->model('system_functions');
-      $data['breadcrumb'] = $this->breadcrumb->generate();
       
       if($query = $this->data_model->get_post_by_id($this->uri->segment(3)))
       {
