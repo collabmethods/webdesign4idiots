@@ -16,6 +16,12 @@
       return $q->result();
     }
     
+    function get_posts_by_type($type)
+    {
+      $q = $this->db->get_where('posts',array('type' => $type));
+      return $q->result();
+    }
+    
     function fetch_comment_count($post_id)
     {
       $q = $this->db->get_where('comments',array('post_id' => $post_id));

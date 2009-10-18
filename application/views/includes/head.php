@@ -13,16 +13,16 @@
     <div id="top-nav">
       <ul>
         <li>
-          <a href="javascript:void(0)" title="" class="<?php echo $activeNav; ?>">home</a>
+          <?php echo anchor('site/index','home',array('class' => $activeNav)) ?>
         </li>
         <li>
           <a href="javascript:void(0)" title="">portfolio</a>
         </li>
         <li>
-          <a href="javascript:void(0)" title="">tutorials</a>
+          <?php echo anchor('site/tutorials','tutorials') ?>
         </li>
         <li>
-          <a href="javascript:void(0)" title="">articles</a>
+          <?php echo anchor('site/articles','articles') ?>
         </li>
         <li>
           <a href="javascript:void(0)" title="">screencasts</a>
