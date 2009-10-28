@@ -1,4 +1,4 @@
-<?php echo form_open('blog/comment_insert'); ?>
+<?php echo form_open('blog/make_comment/'.$row->id); ?>
 <ul>
   <li>
     <?php echo form_label('message'); ?>

@@ -5,9 +5,11 @@
     //POSTS
     function get_posts()
     {
-  		$q = "SELECT *, FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%M %D %Y') as date  FROM `posts`";
-  		$query = $this->db->query($q);
-  		return $query->result();
+  		$q = $this->db->query("SELECT *, FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%M %D %Y') as date  FROM `posts`");
+  		foreach($q->result() as $row) {
+  		  $data[] = $row;
+  		}
+  		return $data;
     }
     
     function get_post_by_id($post_id)
@@ -45,6 +47,35 @@
     {
       $q = $this->db->get_where('comments',array('post_id' => $post_id));
       return $q->result();
+    }
+    
+    function find_comment_count($post_id)
+    {
+      $this->db->select('comment_count');
+      $this->db->where('id', $post_id); 
+      $q = $this->db->get('posts');
+      foreach ($q->result() as $row) {
+        $data[] = $row;
+      }
+      return $data;
+    }
+    
+    function update_comment_count($post_id,$comment_count)
+    {
+      $update = $this->db->update('posts',array('comment_count' => $comment_count),array('id' => $post_id));
+    }
+    
+    function insert_comment($post_id)
+    {
+      $comment_data = array(
+        'id' => '',
+        'post_id' => $post_id,
+        'author' => $this->input->post('full_name'),
+        'content' => $this->input->post('message'),
+        'date' => date("Y-m-d")
+      );
+      
+      $insert = $this->db->insert('comments',$comment_data);
     }
     
   }

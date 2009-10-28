@@ -12,24 +12,15 @@
       $this->load->model('data_model');
       $this->load->model('system_functions');
       
-      if($query = $this->data_model->get_posts())
-      {
-        //retrieve all post data 
-        $data['records'] = $query;
-        foreach ($data['records'] as $row) {
-          $data['title'] = $row->title;
-        }
-        
-        //truncate content for home page
-        $data['excerpt'] = $this->system_functions->truncate($row->content,500);
-        $data['comment_count'] = $this->data_model->fetch_comment_count($row->id);
-      }
-      
-      //get the category of the post
-      if($data['category'] = $this->data_model->get_category($row->category)) {
-        foreach ($data['category'] as $row)
-        {
-          $data['category_name'] = $row->name;
+      //retrieve all post data 
+      $data['records'] = $this->data_model->get_posts();
+      foreach ($data['records'] as $row) {
+        //get the category of the post
+        if($data['category'] = $this->data_model->get_category($row->category)) {
+          foreach ($data['category'] as $row)
+          {
+            $data['category_name'] = $row->name;
+          }
         }
       }
       
@@ -51,9 +42,6 @@
         foreach ($data['post_data'] as $row) {
           $data['title'] = $row->title;
         }
-        
-        //truncate content for home page
-        $data['comment_count'] = $this->data_model->fetch_comment_count($row->id);
       }
       
       //get the category of the post

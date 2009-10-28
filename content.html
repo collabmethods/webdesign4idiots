@@ -1,0 +1,371 @@
+<div id="content">
+    <div id="entry">
+	  	  <div class="exerpt" id="post-6732">
+	    <img src="http://nettuts.s3.amazonaws.com/437_gettingClean/images/preview.jpg" alt="Getting Clean With PHP" width="200" height="200"/>	    <h1>Getting Clean With PHP</h1>
+	    <small>Sep 15th in <a href="http://net.tutsplus.com/category/tutorials/php/" title="View all posts in PHP" rel="category tag">PHP</a>		 by <a href="http://net.tutsplus.com/author/michaelowens/" title="Posts by Michael Owens">Michael Owens</a></small>
+
+                   <div class="text">
+	      <p>Data security is important and often undervalued by designers, developers, and clients alike. Since PHP 5.2.0, data sanitization and validation has been made significantly easier with the introduction of data filtering. Today, we're going to take a closer look at these filters, how to use them, and build a few custom functions.</p>
+	
+	    
+           		
+	    </div>
+        <div class="clear" ></div>
+	  </div>
+            <div id="about_author" class="clearfix"> 
+	  <img alt='PG' src='http://www.gravatar.com/avatar/fc2ded935930e069e51138c588cfad22?s=80&amp;d=http%3A%2F%2Fnettuts.s3.amazonaws.com%2FMisc%2Fwriter_nettuts.jpg%3Fs%3D80&amp;r=PG' class='avatar avatar-80 photo' height='80' width='80' />              <div class="author_text">
+          <h4>Author: <a href="http://mowens.com" title="Visit Michael Owens&#8217;s website" rel="external">Michael Owens</a></h4>
+
+                    <p>Hi! I'm Michael, and I'm a standardista freelance web designer/developer who specializes in (X)HTML/CSS, PHP ⁄ MySQL, Javascript (especially jQuery and Mootools), and user-centric design. I write occasionally on my blog at <a href="http://mowens.com/?src=nettuts">http://mowens.com</a> but more often can be found tweeting at <a href="http://twitter.com/michaelowens">@michaelowens</a>.</p>
+                    
+        </div>
+        <div class="clear"></div>
+      </div>
+            
+
+
+<h3>Tutorial Details</h3>
+
+<ul>
+	<li><b>Program</b>: PHP </li>
+	<li><b>Version</b>: 5.2.0+</li>
+	<li><b>Difficulty:</b> Beginner</li>
+	<li><b>Estimated Completion Time:</b> 20 minutes</li>
+
+</ul>
+
+<div class="tutorial_image">
+<a href="http://nettuts.s3.amazonaws.com/437_gettingClean/demo.zip"><img src="http://nettuts.com/wp-content/themes/nettuts/site_images/button_src_nm.jpg"></a>
+</div>
+
+
+<h3>Introduction</h3>
+<p>I have always felt that it's easy to write code in PHP, and even easier to write bad code in PHP. The proliferation of PHP on the web has really been helped out by its use in popular open-source software packages like WordPress, Drupal, and Magento as well as major web applications like Facebook; with PHP being used in so many varied instances (dynamic websites, in-depth web applications, blogging platforms, content management systems, and e-commerce being only a subset of the many applications of PHP) the opportunities for <em>dirty</em> data and insecure systems are numerous. This tutorial will explain some methods of <strong>Getting Clean With PHP: Data Sanitization and Validation</strong> by focusing on several different forms of data inputs and how to use PHP filters and custom functions.</p>
+
+<div class="tutorial_image"><img src="http://nettuts.s3.amazonaws.com/437_gettingClean/images/forms_to_clean.png" border="0" alt="Sanitization and Validation of Forms" /></div>
+<h3>Why Sanitize and Validate?</h3>
+<p>In this tutorial, we are really focused on data inputs that users or external sources may provide. This means that we do not control the data we are receiving. All we can do is control what is done with it after we receive it. There are all sorts of threats related to data security from user-inputs and third-party data.</p>
+<p>Some <em>un-</em>popular data security threats:</p>
+<ul>
+<li><strong>Cross-Site Scripting (XSS)</strong>: A form of code injection where a script is injected onto a website from a completely different website. This is by far the most common security vulnerability online. Two recent, very prominent examples of this technique are the <a href="http://bit.ly/TwitterXSS">Stalk Daily and Mikeyy Twitter Worms</a> from earlier this year that used poorly sanitized inputs to launch Javascript via an "infected" Twitter web interface.</li>
+<li><strong>SQL Injection</strong>: The second most common security vulnerability online, this is another form of code injection in which a script is used to participate in one of numerous exploitative behaviors including (but not limited to) exposing and/or gaining unauthorized access to data, altering data inside of a database, or simply injecting code to be rendered or executed within a website thereby breaking or altering the website.</li>
+
+<li><strong>Cross-Site Request Forgery (CSRF/XSRF)</strong>: A less common exploit that relies more on data sources like browser and session cookies than poorly sanitized and validated data inputs, CSRF (pronounced "sea-surf") can be used to execute commands on a website without the user's permission. One popular CSRF method is using an improperly formed image data URI or src value to execute a script instead of displaying an image.</li>
+<li><strong>Improper Data</strong>: Not really a "security vulnerability" <em>per se</em>, improper data can cause hosts of problems for a website owner or database administrator. Often, improper data can break poorly coded websites or cause automated systems to crash. An example of this was the ability to alter entire MySpace profile pages by posting using all sorts of HTML/CSS hackery (Note: this may still work; I've not used MySpace in a long time).</li>
+</ul>
+<div class="tutorial_image">
+	<img src="http://nettuts.s3.amazonaws.com/437_gettingClean/images/exploits_of_a_mom.png" border="0" alt="Exploits of a Mom" title="Her daughter is named Help I'm trapped in a driver's license factory." />
+	<div><em>Image Source: <a href="http://xkcd.com/327/">XKCD</a></em></div>
+</div>
+
+<p>For our purposes, we are going to only focus on server-side methods of improving data security with PHP, so let's see how the terms "sanitization" and "validation" are defined with relation to PHP. According to the <a href="http://www.php.net/manual/en/intro.filter.php">PHP manual</a>:</p>
+<blockquote>Validation is used to validate or check if the data meets certain qualifications. For example, passing in FILTER_VALIDATE_EMAIL will determine if the data is a valid email address, but will not change the data itself.<br /><br />Sanitization will sanitize the data, so it may alter it by removing undesired characters. For example, passing in FILTER_SANITIZE_EMAIL will remove characters that are inappropriate for an email address to contain. That said, it does not validate the data.</blockquote>
+<p>Essentially, if your website is the nightclub that everybody wants to get into, validation checks the guest list and IDs at the door while sanitization acts as the bouncer that throws out any undesirables that happen to squeak past. With this in mind, let's take a look at PHP Filters Extension.</p>
+<h3>What Filters Do I Have?</h3>
+<p>All PHP installations are not created equal. While PHP 5.2.0 was the introduction of filters, not all installations have the same set of filters in their Filters Extension. Most installations will have all of the filters we're going to go over, but to teach you a bit about the Filters Extension, we're going to find out just what you have on your server. In the source download, I have included a file called <em>getfilters.php</em> that, once installed and run on your server, will display all of your filters (both data filters available through the <strong>filter_var</strong> function and stream filters available through <strong>stream_filter_append</strong>).</p>
+
+<pre name="code" class="php">
+ echo "&lt;h1&gt;Data Filters&lt;/h1&gt;\n&lt;table&gt;\n&lt;tr&gt;\n";
+ echo "&lt;td&gt;&lt;strong&gt;Filter ID&lt;/strong&gt;&lt;/td&gt;\n";
+ echo "&lt;td&gt;&lt;strong&gt;Filter Name&lt;/strong&gt;&lt;/td&gt;\n&lt;/tr&gt;";
+ foreach(filter_list() as $id =&gt;$filter) {
+	 echo "&lt;tr&gt;&lt;td&gt;$filter&lt;/td&gt;&lt;td&gt;".filter_id($filter)."&lt;/td&gt;&lt;/tr&gt;\n";
+ }
+ echo "&lt;/table&gt;\n";
+
+</pre>
+<p>First, we get the array containing the list of all available filters with <strong>filter_list</strong>, then we loop through the array and echo out the filter name, find out the filter's assigned ID, and echo this ID as well.</p>
+<h3>How Do I Use A Filter?</h3>
+<p>PHP Filters for validation and sanitization are activated by passing at least two values to the PHP Filters Extension function <em>filter_var</em>. As an example, let's use the Sanitize Filter for an Integer number like so:</p>
+<pre name="code" class="php">
+$value = '123abc456def';
+echo filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+</pre>
+<p>In the example, we have a variable <em>$value</em> that is passed through the Filters Extension function <em>filter_var</em> using the <em>FILTER_SANITIZE_NUMBER_INT</em> filter. This results in the following output:</p>
+
+<pre name="code" class="html">
+123456
+</pre>
+<p>The Sanitize Filter for an Integer number removes all non-integer characters from the output and produces a clean integer. Within the <a href="http://nettuts.s3.amazonaws.com/437_gettingClean/demo.zip">download source code</a>, you can try out various inputs and it will apply a number of common filters to your input value. I have included a number of different example strings that you can test out as well.</p>
+<h3>What Do The Different Filters Do?</h3>
+<p>The list below is not complete, but it does contain the majority of the filters that come standard with 5.2.0+ installations. Custom filters and those added from custom extensions are not included here.</p>
+<p><strong>FILTER_VALIDATE_BOOLEAN:</strong> Checks whether or not the data passed to the filter is a boolean value of <em>TRUE</em> or <em>FALSE</em>. If the value is a non-boolean value, it will return <em>FALSE</em>. The script below would echo "TRUE" for the example data <em>$value01</em> but would echo "FALSE" for the example data <em>$value02</em>:</p>
+
+<pre name="code" class="php">
+$value01 = TRUE;
+if(filter_var($value01,FILTER_VALIDATE_BOOLEAN)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+echo '&lt;br /&gt;&lt;br /&gt;'
+$value02 = TRUE;
+if(filter_var($value02,FILTER_VALIDATE_BOOLEAN)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+</pre>
+<p><strong>FILTER_VALIDATE_EMAIL:</strong> Checks whether or not the data passed to the filter is a potentially valid e-mail address. It does not check whether the e-mail address actually exists, just that the format of the e-mail address is valid. The Script below would echo "TRUE" for the example data <em>$value01</em> but would echo "FALSE" for the example data <em>$value02</em> (because the second lacks the required @domain.tld portion of the e-mail address):</p>
+<pre name="code" class="php">
+
+$value01 = 'test@example.com';
+if(filter_var($value01,FILTER_VALIDATE_EMAIL)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+echo '&lt;br /&gt;&lt;br /&gt;'
+$value02 = 'nettuts';
+if(filter_var($value02,FILTER_VALIDATE_EMAIL)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+</pre>
+<p><strong>FILTER_VALIDATE_FLOAT:</strong> Checks whether or not the data passed to the filter is a valid float value. The Script below would echo "TRUE" for the example data <em>$value01</em> but would echo "FALSE" for the example data <em>$value02</em> (because comma separators are not allowed in float values):</p>
+<pre name="code" class="php">
+$value01 = '1.234';
+if(filter_var($value01,FILTER_VALIDATE_FLOAT)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+echo '&lt;br /&gt;&lt;br /&gt;'
+$value02 = '1,234';
+if(filter_var($value02,FILTER_VALIDATE_FLOAT)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+
+</pre>
+<p><strong>FILTER_VALIDATE_INT:</strong> Checks whether or not the data passed to the filter is a valid integer value. The Script below would echo "TRUE" for the example data <em>$value01</em> but would echo "FALSE" for the example data <em>$value02</em> (because fractions / decimal numbers are not integers):</p>
+<pre name="code" class="php">
+$value01 = '123456';
+if(filter_var($value01,FILTER_VALIDATE_INT)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+echo '&lt;br /&gt;&lt;br /&gt;'
+$value02 = '123.456';
+if(filter_var($value02,FILTER_VALIDATE_INT)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+</pre>
+
+<p><strong>FILTER_VALIDATE_IP:</strong> Checks whether or not the data passed to the filter is a potentially valid IP address. It does not check if the IP address would resolve, just that it fits the required data structure for IP addresses. The Script below would echo "TRUE" for the example data <em>$value01</em> but would echo "FALSE" for the example data <em>$value02</em>:</p>
+<pre name="code" class="php">
+$value01 = '192.168.0.1';
+if(filter_var($value01,FILTER_VALIDATE_IP)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+echo '&lt;br /&gt;&lt;br /&gt;'
+$value02 = '1.2.3.4.5.6.7.8.9';
+if(filter_var($value02,FILTER_VALIDATE_IP)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+</pre>
+<p><strong>FILTER_VALIDATE_URL:</strong> Checks whether or not the data passed to the filter is a potentially valid URL. It does not check if the URL would resolve, just that it fits the required data structure for URLs. The Script below would echo "TRUE" for the example data <em>$value01</em> but would echo "FALSE" for the example data <em>$value02</em>:</p>
+
+<pre name="code" class="php">
+$value01 = 'http://net.tutsplus.com';
+if(filter_var($value01,FILTER_VALIDATE_URL)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+echo '&lt;br /&gt;&lt;br /&gt;'
+$value02 = 'nettuts';
+if(filter_var($value02,FILTER_VALIDATE_URL)) {
+ echo 'TRUE';
+} else {
+ echo 'FALSE';
+}
+</pre>
+<p><strong>FILTER_SANITIZE_STRING:</strong> By default, this filter removes any data from a string that is invalid or not allowed in that string. For example, this will remove any HTML tags, like <em>&lt;script&gt;</em> or <em>&lt;strong&gt;</em> from an input string:</p>
+<pre name="code" class="php">
+
+$value = '&lt;script&gt;alert('TROUBLE HERE');&lt;/script&gt;';
+echo filter_var($value, FILTER_SANITIZE_STRING);
+</pre>
+<p>This script would remove the tags and return the following:</p>
+<pre name="code" class="html">
+alert('TROUBLE HERE');
+</pre>
+<p><strong>FILTER_SANITIZE_ENCODED:</strong> Many programmers use PHP's <em>urlencode()</em> function to handle their URL Encoding. This filter essentially does the same thing. For example, this will encode any spaces and/or special characters from an input string:</p>
+
+<pre name="code" class="php">
+$value = '&lt;script&gt;alert('TROUBLE HERE');&lt;/script&gt;';
+echo filter_var($value, FILTER_SANITIZE_ENCODED);
+</pre>
+<p>This script would encode the punctuation, spaces, and brackets, then return the following:</p>
+<pre class="html" name="code">
+%3Cscript%3Ealert%28%27TROUBLE%20HERE%27%29%3B%3C%2Fscript%3E
+</pre>
+<p><strong>FILTER_SANITIZE_SPECIAL_CHARS:</strong> This filter will, by default, HTML-encode special characters like quotes, ampersands, and brackets (in addition to characters with ASCII value less than 32). While the demo page does not make it abundantly clear without viewing the source (because the HTML-encoded special characters will be interpreted and rendered out), if you take a look at the source code you'll see the encoding at work:</p>
+<pre name="code" class="php">
+
+$value = '&lt;script&gt;alert('TROUBLE HERE');&lt;/script&gt;';
+echo filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
+</pre>
+<p>It converts the special characters into their HTML-encoded selves:</p>
+<pre class="html" name="code">
+&amp;#60;script&amp;#62;alert(&amp;#39;TROUBLE HERE&amp;#39;);&amp;#60;/script&amp;#62;
+</pre>
+<p><strong>FILTER_SANITIZE_EMAIL:</strong> This filter does exactly what one would think it does. It removes any characters that are invalid in e-mail addresses (like parentheses, brackets, colons, etc). For example, let's say you accidentally added parentheses around a letter of your e-mail address (don't ask how, use your imagination):</p>
+
+<pre name="code" class="php">
+$value = 't(e)st@example.com';
+echo filter_var($value, FILTER_SANITIZE_EMAIL);
+</pre>
+<p>It removes those parentheses and you get your beautiful e-mail address back:</p>
+<pre class="html" name="code">
+test@example.com
+</pre>
+<p>This is a great filter to use on e-mail forms in concert with FILTER_VALIDATE_EMAIL to reduce user error or prevent XSS-related attacks (as some past XSS attacks involved the returning of the original data provided in a non-sanitized e-mail field directly to the browser).</p>
+<p><strong>FILTER_SANITIZE_URL:</strong> Similar to the e-mail address sanitize filter, this filter does exactly what one would think, as well. It removes any characters that are invalid in a URL (like certain UTF-8 characters, etc). For example, let's say you accidentally added a "®" into your website's URL (again, don't ask how, pretend a velociraptor did it):</p>
+<pre name="code" class="php">
+$value = 'http://net.tuts®plus.com';
+echo filter_var($value, FILTER_SANITIZE_URL);
+</pre>
+
+<p>It removes the unwanted "®" and you get your handsome URL back:</p>
+<pre class="html" name="code">
+http://net.tutsplus.com
+</pre>
+<p><strong>FILTER_SANITIZE_NUMBER_INT:</strong> This filter is similar to the FILTER_VALIDATE_INT but instead of simply checking if it is an Integer or not, it actually removes everything non-integer from the value! Handy, indeed, for pesky spambots and tricksters in some input forms:</p>
+<pre name="code" class="php">
+$value01 = '123abc456def';
+echo filter_var($value01, FILTER_SANITIZE_NUMBER_INT);
+echo '&lt;br /&gt;';
+$value02 = '1.2.3.4.5.6.7.8.9';
+echo filter_var($value02, FILTER_SANITIZE_NUMBER_INT);
+</pre>
+<p>Those silly letters and decimals get thrown right out:</p>
+<pre class="html" name="code">
+
+123456
+123456789
+</pre>
+<p><strong>FILTER_SANITIZE_NUMBER_FLOAT:</strong> This filter is similar to the FILTER_VALIDATE_INT but instead of simply checking if it is an Integer or not, it actually removes everything non-integer from the value! Handy, indeed, for pesky spambots and tricksters in some input forms:</p>
+<pre name="code" class="php">
+$value01 = '123abc456def';
+echo filter_var($value01, FILTER_SANITIZE_NUMBER_FLOAT);
+echo '&lt;br /&gt;';
+$value02 = '1.2.3.4.5.6.7.8.9';
+echo filter_var($value02, FILTER_SANITIZE_NUMBER_FLOAT);
+</pre>
+<p>Again, all those silly letters and decimals get thrown right out:</p>
+<pre name="code" class="html">
+123456
+123456789
+</pre>
+<p>But what if you wanted to keep a decimal like in the next example:</p>
+
+<pre name="code" class="php">
+$value = '1.23';
+echo filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT);
+</pre>
+<p>It would still remove it and return:</p>
+<pre name="code" class="html">
+123
+</pre>
+<p>One of the main reasons why FILTER_SANITIZE_NUMBER_FLOAT and FILTER_SANITIZE_INT are separate filters is to allow for this via a special Flag "FILTER_FLAG_ALLOW_FRACTION" that is added as a third value passed to <em>filter_var</em>:</p>
+<pre name="code" class="php">
+$value = '1.23';
+echo filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+</pre>
+<p>It would keep the decimal and return:</p>
+
+<pre name="code" class="html">
+1.23
+</pre>
+<h3>Options, Flags, and Array Controls, OH MY!</h3>
+<p>The flag in this last example is just one of many more options, flags, and array controls that allow you to have more granular control over what types of data gets sanitized, definitions of delimiters, how arrays are processed by the filters, and more. You can find more about these flags and other filter-related functions in the PHP manual's <a href="http://www.php.net/manual/en/book.filter.php">Filters Extension section</a>.</p>
+<h3>Other Methods of Santizing Data with PHP</h3>
+<p>Now, we'll go over a few key supplemental methods of sanitizing data with PHP to prevent "dirty data" from wreaking havoc on your systems. These are especially useful for applications still running PHP 4, as they were all available when it was released.</p>
+<p><strong>htmlspecialchars</strong>: This PHP function converts 5 special characters into their corresponding HTML entities:
+<ul>
+<li>'&amp;' (ampersand) becomes '&amp;amp;'</li>
+
+<li>'"' (double quote) becomes '&amp;quot;' when ENT_NOQUOTES is not set.</li>
+<li>''' (single quote) becomes '&amp;#039;' only when ENT_QUOTES is set.</li>
+<li>'&lt;' (less than) becomes '&amp;lt;'</li>
+<li>'&gt;' (greater than) becomes '&amp;gt;'</li>
+</ul>
+</p>
+<p>It is used like any other PHP string function:</p>
+
+<pre name="code" class="php">
+echo htmlspecialchars('$string');
+</pre>
+<p><strong>htmlentities</strong>: Like htmlspecialchars, this PHP function converts characters into their corresponding HTML entities. The big difference is that <strong>ALL</strong> characters that can be converted will be converted. This is a useful method of obfuscating e-mail addresses from some bots that collect e-mail addresses, as not of them are programmed to read htmlentities.</p>
+<p>It is used like any other PHP string function:</p>
+<pre name="code" class="php">
+echo htmlentities('$string');
+</pre>
+<p><strong>mysql_real_escape_string</strong>: This MySQL function helps protect against SQL injection attacks. It is considered a best practice (or even a mandatory practice) to pass all data that is being sent to a MySQL query through this function. It escapes any special characters that could be problematic and would cause little Bobby Tables to destory yet another school students database.</p>
+
+<pre name="code" class="php">
+$query = 'SELECT * FROM table WHERE value='.mysql_real_escape_string('$string').' LIMIT 1,1';
+$runQuery = mysql_query($query);
+</pre>
+<h3>Custom Functions</h3>
+<p>For many people, these built-in filters and functions are just not good enough. Data validation of some data like phone numbers, zip codes, or even e-mails often requires more strict validation and masking. To do this, many people create custom functions to validate and their data is real. An example of this may be as simple as using a MySQL query to look up the data in a database of known values like so:</p>
+<pre name="code" class="php">
+function checkZipCode($value) {
+	$zipcheck = 'SELECT COUNT(*) FROM `database`.`zipcodes` WHERE value="'.filter_var(mysql_real_escape_string($value),FILTER_SANITIZE_NUMBER_INT).'"';
+	$count = mysql_query($zipcheck);
+	if($count==1) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+</pre>
+<p>Other custom functions can be made that do not rely on databases of known values, and can be created by checking magic-quotes, stripping slashes, and escaping for insert into a database:</p>
+<pre name="code" class="php">
+function cleanString($string) {
+	$detagged = strip_tags($string);
+	if(get_magic_quotes_gpc()) {
+		$stripped = stripslashes($detagged);
+		$escaped = mysql_real_escape_string($stripped);
+	} else {
+		$escaped = mysql_real_escape_string($detagged);
+	}
+	return $escaped;
+}
+</pre>
+<p>The possibilities are endless, especially if you integrate regular expressions, but for most occasions, the PHP Filters Extension should do the trick.</p>
+
+<ul class="webroundup">
+    <li>Follow us on <a href="http://www.twitter.com/nettuts">Twitter</a>, or subscribe to the <a href="http://feeds.feedburner.com/nettuts" title="Nettuts+ RSS Feed">Nettuts+ RSS Feed</a> for more daily web development tuts and articles.</li></ul>
+
+<p>
+<script type="text/javascript"><!--digg_url = "post permalink (not digg url)"; // -->
+</script>
+<script src="http://digg.com/tools/diggthis.js" type="text/javascript"></script></p><br class="clear" />      </div>
+
+      
+      <div id="post_meta" class="clearfix">
+        <div id="realted_post_text">
+          <h3>Related Posts</h3><p>Check out some more great tutorials and articles that you might like</p>          </div>
+          <div id="related_posts">          
+          <ul><li><a href="http://net.tutsplus.com/tutorials/php/sanitize-and-validate-data-with-php-filters/" rel="bookmark" title="January 15, 2009">Sanitize and Validate Data with PHP Filters</a> <span>PHP </span></li>
+
+<li><a href="http://net.tutsplus.com/tutorials/php/real-world-oop-with-php-and-mysql/" rel="bookmark" title="November 26, 2008">Real-World OOP With PHP and MySQL</a> <span>PHP </span></li>
+
+<li><a href="http://net.tutsplus.com/tutorials/php/how-to-implement-email-verification-for-new-members/" rel="bookmark" title="May 18, 2009">How to Implement Email Verification for New Members</a> <span>PHP </span></li>
+</ul><!-- Similar Posts took 63.899 ms -->        </div>
+        <div class="clear"></div>
+       
+  </div>
+</div>

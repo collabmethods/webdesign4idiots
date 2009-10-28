@@ -50,13 +50,13 @@ vars {
 #breadcrumbs li {float: left;margin: 0 5px 0 0;}
 
 /* This is the main content area */
-#mainContent {float: left;width: 720px;}
+#mainContent {float: left;width: 670px;}
 
 /* Post Styles */
 .post-container {
-  self {clear: both;float: left;position: relative;padding: 10px;}
+  self {clear: both;float: left;position: relative;padding: 10px;width: 660px;}
   h2 {
-    self {float: left;margin: 0 0 5px 0;width: 700px;}
+    self {float: left;margin: 0 0 5px 0;width: 100%;}
     a {color: #27221F;font-family: Helvetica;font-size: 25px;font-weight: bold;}
     a:hover {text-decoration: underline;}
     p {clear: both;float: left !important;}
@@ -65,9 +65,9 @@ vars {
 }
 
 /* Comment Styles*/
-#comments-container {clear: both;float: left;margin: 10px 0 0 15px;padding: 10px;width: 675px;border: 1px solid #DFDFDF;background: #EDEDED;}
+#comments-container {clear: both;float: left;margin: 10px 0 0 15px;padding: 10px;width: 643px;border: 1px solid #DFDFDF;background: #EDEDED;}
 .comment-list {clear: both;float: left;width: 100%;}
-.comment-list li {clear: both;float: left;width: 100%;}
+.comment-list li {clear: both;float: left;margin: 0 0 10px 0;width: 100%;}
 .comment-user {float: left;width: 110px;}
 .comment-content {float: right;width: 530px;}
 .comment-content p {float: left;padding: 10px;width: 96%;background: #fff;border: 1px solid #DFDFDF;}
@@ -78,8 +78,8 @@ vars {
       self{clear: both;float: left;width: 100%;}
       input[type="text"] {float: right;margin: 0 0 5px 0;padding: 7px 7px;width: 530px;color: #5F6565;border: 1px solid #DFDFDF;}
       textarea {float: right;margin: 0 0 5px 0;padding: 7px 7px;width: 530px;height: 150px;color: #5F6565;border: 1px solid #DFDFDF;}
-      a {float: right;padding: 3px 10px 5px 10px;margin: 10px 0 0 0;color: #fff;font-weight: bold;cursor: pointer;border: none;background: #1B719B;}
-      a:hover {background: #009AEF;}
+      input[type='submit'] {float: right;padding: 3px 10px 5px 10px;margin: 10px 0 0 0;color: #fff;font-weight: bold;cursor: pointer;border: none;background: #1B719B;}
+      input[type='submit']:hover {background: #009AEF;}
     }
 }
 #comments-container .clear-fix {clear: both;float: left;width: 100%;}
@@ -90,16 +90,28 @@ vars {
 .meta-data {float: left;margin: 15px 0 0 0;padding: 2px 8px;color: #fff;background: #009AEF;}
 .read-more {float: left;margin: 10px 0 0 0;padding: 2px 8px;color: #3B75AF;font-size: 14px;}
 
-.post {clear: both;float: left;margin: 30px 0 0 0;padding: 0 0 40px 0;width: 705px;border-bottom: 1px solid #dfdfdf;}
-.post img {float: left;padding: 5px;border: 1px solid #DBDADA;}
-.post p {clear: none !important;float:left;margin: 0 0 0 10px;width: 480px;}
+.post {
+  self {clear: both;float: left;margin: 30px 0 0 0;padding: 0 0 40px 0;width: 665px;border-bottom: 1px solid #dfdfdf;}
+  img {float: left;padding: 5px;border: 1px solid #DBDADA;}
+  p {clear: none !important;float:left;margin: 0 0 0 10px;width: 425px;}
+}
 
 .cloud-comment {position: absolute;top: 10px;right: 12px;float: right;padding: 10px;width: 62px;height: 62px;background: url('../images/cloud_comment.png') no-repeat;}
 .cloud-comment span {float: left;margin: 3px 0 0 0;width: 90%;text-align: center;color: #fff;font-size: 23px;}
 
 /* This is the content for the right sidebar */
-#sideContent {float: right;width: 230px;height: 806px;border-left: 1px solid #9F9F9F;background: #cfcfcf;}
-#sideContent p {float: left;padding: 0 10px;}
+#sideContent {
+  self {float: right;width: 280px;height: 806px;border-left: 1px solid #9F9F9F;background: #cfcfcf;}
+  p {float: left;padding: 0 10px;}
+  ul {
+    self {float: left;padding: 5px;width: 270px;}
+    li {
+      self {float: left;margin: 0 5px 10px 5px;}
+      a {float: left;}
+      img {float: left;}
+    }
+  }
+}
 
 /* FOOTER */
 #footer-wrap {position: relative;display: block;min-width: 1002px;background: #372C24 url('../images/footer_bg.png') repeat-x scroll 0 0;}
