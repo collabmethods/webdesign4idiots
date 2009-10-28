@@ -19,7 +19,7 @@
   <div id="comments-container">
     <div class="clear-fix">
       <h3>User Comments</h3>
-      <a href="#" onclick="Effect.SlideDown('new-comment-form');return false;">make a comment</a>
+      <a href="#" onclick="Effect.SlideDown('new-comment-form');return true;">make a comment</a>
     </div>
     <ul id="new-comment-form" class="comment-list" style="display:none;">
       <li>

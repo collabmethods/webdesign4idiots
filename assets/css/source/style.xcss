@@ -50,7 +50,7 @@ vars {
 #breadcrumbs li {float: left;margin: 0 5px 0 0;}
 
 /* This is the main content area */
-#mainContent {float: left;width: 670px;}
+#mainContent {float: left;padding: 10px;width: 658px;}
 
 /* Post Styles */
 .post-container {
@@ -110,6 +110,18 @@ vars {
       a {float: left;}
       img {float: left;}
     }
+  }
+}
+
+/* Styling for the contact form */
+#contact-form {
+  self {float: left;width: 400px;}
+  li {
+    self {clear: both;float: left;margin: 0 0 10px 0;width: 100%;}
+    input[type="text"] {float: left;padding: 6px 7px;width: 382px;background: #CFEFFF;border: 1px solid #0986C8;}
+    textarea {float: left;padding: 6px 7px;width: 100%;}
+    select {float: left;padding: 4px 7px;}
+    input[type="submit"] {float: left;padding: 4px 7px;background: #dfdfdf;border: 1px solid #ccc;}
   }
 }
 

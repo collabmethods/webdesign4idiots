@@ -16,7 +16,7 @@
           <?php echo anchor('site/index','home',array('class' => $activeNav)) ?>
         </li>
         <li>
-          <a href="javascript:void(0)" title="">portfolio</a>
+          <?php echo anchor('site/portfolio','portfolio') ?>
         </li>
         <li>
           <?php echo anchor('site/tutorials','tutorials') ?>
@@ -25,10 +25,10 @@
           <?php echo anchor('site/articles','articles') ?>
         </li>
         <li>
-          <a href="javascript:void(0)" title="">screencasts</a>
+          <?php echo anchor('site/screencasts','screencasts') ?>
         </li>
         <li>
-          <a href="javascript:void(0)" title="">contact</a>
+          <?php echo anchor('site/contact','contact') ?>
         </li>
         <li class="green">
           <a href="javascript:void(0)" title="">donate!</a>
