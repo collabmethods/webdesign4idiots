@@ -13,19 +13,19 @@
     <div id="top-nav">
       <ul>
         <li>
-          <?php echo anchor('site/index','home',array('class' => $activeNav)) ?>
+          <?php echo anchor('site/index/','home',array('class' => $activeNav)) ?>
+        </li>
+        <li>
+          <?php echo anchor('tutorials/all_tutorials','tutorials') ?>
+        </li>
+        <li>
+          <?php echo anchor('posts/all_posts','blog') ?>
+        </li>
+        <li>
+          <?php echo anchor('tutorials/all_screencasts','screencasts') ?>
         </li>
         <li>
           <?php echo anchor('site/portfolio','portfolio') ?>
-        </li>
-        <li>
-          <?php echo anchor('site/tutorials','tutorials') ?>
-        </li>
-        <li>
-          <?php echo anchor('site/articles','articles') ?>
-        </li>
-        <li>
-          <?php echo anchor('site/screencasts','screencasts') ?>
         </li>
         <li>
           <?php echo anchor('site/contact','contact') ?>

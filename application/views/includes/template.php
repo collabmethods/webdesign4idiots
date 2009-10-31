@@ -5,7 +5,7 @@
 </div>
 
 <div id="sideContent">
-<?php $this->load->view('sidebar'); ?>
+<?php $this->load->view('includes/sidebar'); ?>
 </div>
 
 <?php $this->load->view('includes/footer'); ?>
