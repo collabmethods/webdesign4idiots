@@ -2,10 +2,30 @@
 
   class Data_model extends Model
   {
+    function get_all()
+    {
+      $q = $this->db->query("SELECT * FROM   
+      (   
+          SELECT id, author, date, title,    
+                 category, excerpt, comment_count,   
+                 FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%M %D %Y') as dateCol, 
+              'posts' as typeName
+          FROM posts   
+          UNION   
+          SELECT id, author, date,title,   
+                 category, excerpt, comment_count,   
+                 FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%M %D %Y') as dateCol,  
+              'tuts' as typeName 
+          FROM tuts   
+      ) derivedTable  
+      ORDER BY date DESC");
+      return $q->result();
+    }
+    
     //POSTS
     function get_posts()
     {
-  		$q = $this->db->query("SELECT *, FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%M %D %Y') as date  FROM `posts`");
+  		$q = $this->db->query("SELECT *, FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%M %D %Y') as date  FROM `posts` ORDER BY `date` DESC");
   		foreach($q->result() as $row) {
   		  $data[] = $row;
   		}
@@ -14,13 +34,19 @@
     
     function get_post_by_id($post_id)
     {
-      $q = $this->db->get_where('posts',array('id' => $post_id));
+      $q = $this->db->query("SELECT *, FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%M %D %Y') as date  FROM `posts` WHERE id = $post_id");
       return $q->result();
     }
     
-    function get_posts_by_type($type)
+    function get_tutorials()
     {
-      $q = $this->db->get_where('posts',array('type' => $type));
+      $q = $this->db->query("SELECT *, FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%M %D %Y') as date  FROM `tuts` ORDER BY `date` DESC");
+      return $q->result();
+    }
+    
+    function get_tutorial_by_id($post_id)
+    {
+      $q = $this->db->query("SELECT *, FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%M %D %Y') as date  FROM `tuts` WHERE id = $post_id");
       return $q->result();
     }
     
