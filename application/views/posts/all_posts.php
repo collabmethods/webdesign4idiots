@@ -1,7 +1,7 @@
 <?php if (isset($posts)): ?>
-  <?php foreach ($posts->results() as $row): ?>
+  <?php foreach ($posts as $row): ?>
     <div class="post-container">
-      <h2><?php echo anchor('posts/load_post/'.$row->id,$row->title); ?></h2>
+      <h2><?php echo anchor('posts/show/'.$row->id,$row->title); ?></h2>
       <p class="meta-data">
         <span><?php echo $row->date; ?>, </span>
         <span>in <?php echo $row->category; ?></span>
@@ -10,7 +10,7 @@
       <div class="post">
         <img src="<?php echo base_url() ?>/assets/post_data/images/code.jpg" alt="tutorial_1" />
         <p><?php echo $row->excerpt; ?></p>
-        <?php echo anchor('site/load_post/'.$row->id,'Read more...',array('class' =>'read-more')); ?>
+        <?php echo anchor('posts/show/'.$row->id,'Read more...',array('class' =>'read-more')); ?>
       </div>
       <div class="cloud-comment">
         <span>
@@ -19,4 +19,7 @@
       </div>
     </div>
   <?php endforeach ?>
-<?php endif ?>
+<?php else: ?>
+  <p>this is an error</p>
+<?php endif;?>
+

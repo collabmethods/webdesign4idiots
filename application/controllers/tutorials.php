@@ -2,10 +2,10 @@
 
 class Tutorials extends Controller {
   
-  function all_tutorials()
+  function index()
   {
-    $this->load->model('tutorial_model');
-    $data['tutorials'] = $this->tutorial_model->get_tutorials();
+    $this->load->model('tutorial');
+    $data['tutorials'] = $this->tutorial->fetch_all();
     
     //set data for data
     $data['main_content'] = 'tutorials/all_tutorials';
@@ -13,13 +13,14 @@ class Tutorials extends Controller {
     $this->load->view('includes/template', $data);
   }
   
-  function load_tutorial() {
-    $this->load->model('tutorial_model');
-    $query = $this->data_model->get_tutorial_by_id($this->uri->segment(3));
+  function show() {
+    $this->load->model('tutorial');
+    $this->load->model('comment');
+    $data['tutorial'] = $this->tutorial->get_by_id($this->uri->segment(3));
     
     //Set data for view
-    $data['comment_data'] = $this->comment_model->get_comments_by_tutorial_id($this->uri->segment(3));
-    $data['main_content'] = 'post_view';
+    $data['comment_data'] = $this->comment->get_by_id($this->uri->segment(3));
+    $data['main_content'] = 'tutorials/single_tutorial';
     $data['activeNav'] = 'active';
     $this->load->view('includes/template', $data);
     }
