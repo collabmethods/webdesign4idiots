@@ -1,12 +1,12 @@
 <?php
-
-class Category_helper extends Helper {
-  
-  function get_categoy_name($category_id)
+  if (!defined('BASEPATH')) exit('No direct script access allowed');
+  if (!function_exists('get_category_name'))
   {
-    $data['category'] = $this->db->get_where('category',array('id' +> $category_id));
-    $categoryName = $data['category']['category_name'];
-    return $categoryName;
+    function get_category_name($category_id)
+    {
+      $CI =& get_instance();
+      $CI->load->model('category');
+      return $CI->category->get_name_by_id($category_id); 
+    }   
   }
-  
-}
+?>

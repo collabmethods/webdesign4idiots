@@ -4,6 +4,7 @@ class Posts extends Controller {
   
   function index()
   {
+    $this->load->helper('date');
     $this->load->model('post');
     $data['posts'] = $this->post->fetch_all();
     //main content data

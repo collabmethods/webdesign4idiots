@@ -3,9 +3,9 @@
     <div class="post-container">
       <h2><?php echo anchor('posts/show/'.$row->id,$row->title); ?></h2>
       <p class="meta-data">
-        <span><?php echo $row->date; ?>, </span>
-        <span>in <?php echo $row->category; ?></span>
-        <span>by <?php echo $row->author; ?></span>
+        <span><?php echo mdate("%F %jth %Y",mysql_to_unix($row->date)); ?>, </span>
+        <span>in <?php echo get_category_name($row->category); ?></span>
+        <span>by <?php echo get_author_name($row->author); ?></span>
       </p>
       <div class="post">
         <img src="<?php echo base_url() ?>/assets/post_data/images/code.jpg" alt="tutorial_1" />

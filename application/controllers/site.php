@@ -2,7 +2,7 @@
 
   class Site extends Controller {
 
-    function Blog()
+    function __construct()
     {
       parent::Controller();
     }

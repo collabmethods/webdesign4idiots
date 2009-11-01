@@ -13,7 +13,7 @@
     <div id="top-nav">
       <ul>
         <li>
-          <?php echo anchor('site/index/','home',array('class' => $activeNav)) ?>
+          <?php echo anchor("",'home',array('class' => $activeNav)) ?>
         </li>
         <li>
           <?php echo anchor('tutorials/index','tutorials') ?>
@@ -25,10 +25,10 @@
           <?php echo anchor('screencasts/index','screencasts') ?>
         </li>
         <li>
-          <?php echo anchor('site/portfolio','portfolio') ?>
+          <?php echo anchor('static/site/portfolio','portfolio') ?>
         </li>
         <li>
-          <?php echo anchor('site/contact','contact') ?>
+          <?php echo anchor('static/site/contact','contact') ?>
         </li>
         <li class="green">
           <a href="javascript:void(0)" title="">donate!</a>
