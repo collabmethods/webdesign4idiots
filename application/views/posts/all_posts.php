@@ -1,5 +1,5 @@
 <?php if (isset($posts)): ?>
-  <?php foreach ($posts as $row): ?>
+  <?php foreach ($posts->results() as $row): ?>
     <div class="post-container">
       <h2><?php echo anchor('posts/load_post/'.$row->id,$row->title); ?></h2>
       <p class="meta-data">

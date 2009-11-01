@@ -2,17 +2,17 @@
 
 class Posts extends Controller {
   
-  function all_posts()
+  function index()
   {
-    $this->load->model('post_model');
-    $data['posts'] = $this->post_model->get_posts();
+    $this->load->model('post');
+    $data['posts'] = $this->post->get();
     //main content data
     $data['main_content'] = 'posts/all_posts';
     $data['activeNav'] = 'active';
     $this->load->view('includes/template', $data);
   }
-  
-  function load_post() {
+
+  function show() {
     $this->load->model('data_model');
     if($query = $this->post_model->get_post_by_id($this->uri->segment(3))) {
       //retrieve all post data 
@@ -33,6 +33,28 @@ class Posts extends Controller {
     $data['main_content'] = 'post_view';
     $data['activeNav'] = 'active';
     $this->load->view('includes/template', $data);
+  }  
+  
+  # /posts/new
+  function new() {
+    
   }
   
+  # /posts  HTTP verb POST
+  function create() {
+    
+  }
+  
+  function edit() {
+    
+  }
+  
+  function update() {
+    
+  }
+ 
+  function delete() {
+    
+  }
+ 
 }

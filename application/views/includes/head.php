@@ -16,13 +16,13 @@
           <?php echo anchor('site/index/','home',array('class' => $activeNav)) ?>
         </li>
         <li>
-          <?php echo anchor('tutorials/all_tutorials','tutorials') ?>
+          <?php echo anchor('tutorials/index','tutorials') ?>
         </li>
         <li>
-          <?php echo anchor('posts/all_posts','blog') ?>
+          <?php echo anchor('posts/index','blog') ?>
         </li>
         <li>
-          <?php echo anchor('tutorials/all_screencasts','screencasts') ?>
+          <?php echo anchor('screencasts/index','screencasts') ?>
         </li>
         <li>
           <?php echo anchor('site/portfolio','portfolio') ?>
