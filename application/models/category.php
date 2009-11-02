@@ -11,9 +11,9 @@ class Category extends Model {
     return $data;
   }
   
-  function get_name_by_id($id)
+  function get_name_by_id($cat_id)
   {
-    $this->db->where(array('id' => $id));
+    $this->db->where('id',$cat_id);
     $this->db->select('name');
     $this->db->from('category');
     $q = $this->db->get();

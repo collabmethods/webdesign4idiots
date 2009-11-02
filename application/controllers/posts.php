@@ -5,7 +5,6 @@ class Posts extends Controller {
   function index()
   {
     $data['posts'] = $this->post->fetch_all();
-    
     //main content data
     $data['main_content'] = 'posts/all_posts';
     $data['activeNav'] = 'active';

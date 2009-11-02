@@ -18,7 +18,11 @@
       </div>
       <div class="cloud-comment">
         <span>
-          <?php echo $row->comment_count ?>
+          <?php if ($row->typeName == 'posts'): ?>
+            <?php echo get_comment_count($row->id,'post'); ?>
+          <?php else: ?>
+            <?php echo get_comment_count($row->id,'tutorial'); ?>
+          <?php endif ?>
         </span>
       </div>
     </div>

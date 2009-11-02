@@ -12,6 +12,15 @@ class Comment extends Model {
       return $data; 
     }
   }
+  
+  function get_count($id,$type)
+  {
+    $this->db->where('post_id',$id);
+    $this->db->where('type',$type);
+    $this->db->from('comments');
+    $count = $this->db->count_all_results();
+    return $count;
+  }
 
   function create_comment()
   {

@@ -14,7 +14,7 @@
       </div>
       <div class="cloud-comment">
         <span>
-          <?php echo $row->comment_count ?>
+          <?php echo get_comment_count($row->id,'tutorial'); ?>
         </span>
       </div>
     </div>
