@@ -2,13 +2,15 @@
 
 class Comment extends Model {
   
-  function get_by_id($id)
+  function get_by_id($id,$type)
   {
-    $q = $this->db->get_where('comments',array('id' => $id));
+    $q = $this->db->get_where('comments',array('post_id' => $id,'type' => $type));
     foreach ($q->result() as $row) {
       $data[] = $row;
     }
-    return $data; 
+    if(isset($data)) {
+      return $data; 
+    }
   }
 
   function create_comment()

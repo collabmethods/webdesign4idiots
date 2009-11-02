@@ -7,6 +7,9 @@ RewriteEngine On
 RewriteCond %{HTTP_USER_AGENT} !”.*Safari.*”
 RewriteCond %{HTTP:Accept-Encoding} gzip
 RewriteCond %{REQUEST_FILENAME}.gz -f
+RewriteRule ^(.*)$ ./index.php/$1 [L,QSA]
+RewriteCond $1 !^(index\.php|images|css|js|robots\.txt|favicon\.ico)  
+RewriteCond %{REQUEST_FILENAME} !-d  
 RewriteRule (.*)\.js$ $1\.js.gz [L]
 ForceType text/javascript
 </FilesMatch>

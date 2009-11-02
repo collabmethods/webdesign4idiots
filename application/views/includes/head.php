@@ -16,19 +16,19 @@
           <?php echo anchor("",'home',array('class' => $activeNav)) ?>
         </li>
         <li>
-          <?php echo anchor('tutorials/index','tutorials') ?>
+          <?php echo anchor('tutorials','tutorials') ?>
         </li>
         <li>
-          <?php echo anchor('posts/index','blog') ?>
+          <?php echo anchor('posts','blog') ?>
         </li>
         <li>
-          <?php echo anchor('screencasts/index','screencasts') ?>
+          <?php echo anchor('screencasts','screencasts') ?>
         </li>
         <li>
-          <?php echo anchor('static/site/portfolio','portfolio') ?>
+          <?php echo anchor('portfolio','portfolio') ?>
         </li>
         <li>
-          <?php echo anchor('static/site/contact','contact') ?>
+          <?php echo anchor('site/contact','contact') ?>
         </li>
         <li class="green">
           <a href="javascript:void(0)" title="">donate!</a>

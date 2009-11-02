@@ -9,6 +9,7 @@
     
     function index()
     { 
+      $data['master_collection'] = $this->master->fetch_all();
       $data['main_content'] = 'home';
       $data['activeNav'] = 'active';
       $this->load->view('includes/template', $data);

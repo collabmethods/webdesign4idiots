@@ -1,8 +1,8 @@
 <?php
 
-class Project_model extends Model {
+class Project extends Model {
   
-  function get_projects()
+  function fetch_all()
   {
     $q = $this->db->get('projects');
     foreach ($q->result() as $row) {

@@ -2,10 +2,10 @@
 
 class Portfolio extends Controller {
   
-  function all_projects()
+  function index()
   {
-    $this->load->model('project_model');
-    $data['projects'] = $this->project_model->get_all_projects();
+    $this->load->model('project');
+    $data['projects'] = $this->project->fetch_all();
     
     //set data for view
     $data['main_content'] = 'portfolio/all_projects';

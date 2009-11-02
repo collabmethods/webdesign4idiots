@@ -51,7 +51,7 @@ $autoload['libraries'] = array('database','session');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','form','category','author');
+$autoload['helper'] = array('url','form','category','author','date');
 
 
 /*
@@ -108,7 +108,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array();
+$autoload['model'] = array('author','category','comment','post','project','tutorial','master');
 
 
 
