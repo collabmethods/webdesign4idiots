@@ -20,4 +20,22 @@ class Master extends Model {
     return $q->result();
   }
   
+  function count_all()
+  {
+    $q = $this->db->query("SELECT * FROM   
+    (   
+        SELECT id, author, date, title,    
+               category, excerpt, comment_count,
+            'posts' as typeName 
+        FROM posts   
+        UNION   
+        SELECT id, author, date,title,   
+               category, excerpt, comment_count, 
+            'tuts' as typeName 
+        FROM tuts   
+    ) derivedTable  
+    ORDER BY date DESC");
+    return $q->num_rows;
+  }
+  
 }

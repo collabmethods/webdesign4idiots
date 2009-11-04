@@ -18,5 +18,6 @@
         </span>
       </div>
     </div>
-  <?php endforeach ?>
-<?php endif ?>
+  <?php endforeach; ?>
+  <?php echo $this->pagination->create_links(); ?>
+<?php endif; ?>

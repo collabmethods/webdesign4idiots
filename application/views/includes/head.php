@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head profile="http://gmpg.org/xfn/11">
-    <title>Inquisitivedzign (php,javscript,xhtml,css,best practice, ranting)</title>
+    <title>Webdesign4idiots by CollabMethods</title>
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/reset.css" type="text/css" media="screen" charset="utf-8" />
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/tyography.css" type="text/css" media="screen" charset="utf-8" />
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/css/xcss/"></script>

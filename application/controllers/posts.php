@@ -4,7 +4,12 @@ class Posts extends Controller {
   
   function index()
   {
-    $data['posts'] = $this->post->fetch_all();
+    $this->load->library('pagination');
+    $config['base_url'] = 'http://localhost.com/webdesign4idiots/index.php/posts/index/';
+    $config['total_rows'] = $this->db->count_all('posts');
+    $config['per_page'] = '1';
+    $this->pagination->initialize($config);
+    $data['posts'] = $this->db->get('posts', $config['per_page'], $this->uri->segment(3))->result();
     //main content data
     $data['main_content'] = 'posts/all_posts';
     $data['activeNav'] = 'active';

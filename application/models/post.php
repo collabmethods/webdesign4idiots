@@ -10,6 +10,7 @@ class Post extends Model {
  //POSTS
   function fetch_all()
   {
+    $this->db->order_by('date','DESC');
     $q = $this->db->get('posts');
 		foreach($q->result() as $row) {
 		  $data[] = $row;

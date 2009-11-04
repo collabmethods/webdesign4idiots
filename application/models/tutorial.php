@@ -4,6 +4,7 @@ class Tutorial extends Model {
   
   function fetch_all()
   {
+    $this->db->order_by('date','DESC');
     $q = $this->db->get('tuts');
 		foreach ($q->result() as $row) {
 		  $data[] = $row;
