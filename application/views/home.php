@@ -27,7 +27,7 @@
       </div>
     </div>
   <?php endforeach ?>
-  <?php // echo $this->pagination->create_links(); ?>
+  <?php  echo $this->pagination->create_links(); ?>
 <?php else: ?>
   <p>this is an error</p>
 <?php endif;?>

@@ -2,7 +2,7 @@
 
 class Master extends Model {
   
-  function fetch_all()
+  function fetch_all($limit,$offset)
   {
     $q = $this->db->query("SELECT * FROM   
     (   
@@ -16,7 +16,7 @@ class Master extends Model {
             'tuts' as typeName 
         FROM tuts   
     ) derivedTable  
-    ORDER BY date DESC");
+    ORDER BY date DESC Limit $offset,$limit");
     return $q->result();
   }
   
