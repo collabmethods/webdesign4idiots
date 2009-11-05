@@ -12,7 +12,7 @@
       $this->load->library('pagination');
       $config['base_url'] = 'http://localhost.com/webdesign4idiots/index.php/site/index/';
       $config['total_rows'] = $this->master->count_all();
-      $config['per_page'] = '2';
+      $config['per_page'] = '4';
       $this->pagination->initialize($config);
       if ($this->uri->segment(3) < 1) {
         $offset = 0;
