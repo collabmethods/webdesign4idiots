@@ -25,13 +25,10 @@
           <?php echo anchor('screencasts','screencasts') ?>
         </li>
         <li>
-          <?php echo anchor('portfolio','portfolio') ?>
+          <?php echo anchor('freebies','freebies') ?>
         </li>
         <li>
-          <?php echo anchor('site/contact','contact') ?>
-        </li>
-        <li class="green">
-          <a href="javascript:void(0)" title="">donate!</a>
+          <?php echo anchor('about','about') ?>
         </li>
       </ul>
     </div>

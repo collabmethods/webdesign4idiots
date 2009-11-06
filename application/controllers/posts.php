@@ -5,7 +5,7 @@ class Posts extends Controller {
   function index()
   {
     $this->load->library('pagination');
-    $config['base_url'] = 'http://localhost.com/webdesign4idiots/index.php/posts/index/';
+    $config['base_url'] = 'http://localhost.com/webdesign4idiots/posts/index/';
     $config['total_rows'] = $this->db->count_all('posts');
     $config['per_page'] = '1';
     $this->pagination->initialize($config);

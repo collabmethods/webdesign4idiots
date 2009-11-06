@@ -27,9 +27,9 @@ vars {
 }
 
 /* STANDARD CLASSES */
-.green a {background: $greenLink !important;}
-.green a:hover {background: $brightGreenLink !important;}
-.green .active {background: $brightGreenLink !important;}
+a.green{background: $greenLink !important;}
+a.green:hover {background: $brightGreenLink !important;}
+a.green:active {background: $brightGreenLink !important;}
 
 /* Top Navigation */
 #top-nav {
@@ -69,6 +69,7 @@ vars {
 .comment-list {clear: both;float: left;width: 100%;}
 .comment-list li {clear: both;float: left;margin: 0 0 10px 0;width: 100%;}
 .comment-user {float: left;width: 110px;}
+.comment-user span {clear: both;float: left;}
 .comment-content {float: right;width: 500px;}
 .comment-content p {float: left;padding: 10px;width: 96%;background: #fff;border: 1px solid #DFDFDF;}
 .comment-content form {clear: both;float: left;width: 100%;}
@@ -76,8 +77,8 @@ vars {
   self {clear: both;float: left;width: 100%;}
     li {
       self{clear: both;float: left;width: 100%;}
-      input[type="text"] {float: right;margin: 0 0 5px 0;padding: 7px 7px;width: 530px;color: #5F6565;border: 1px solid #DFDFDF;}
-      textarea {float: right;margin: 0 0 5px 0;padding: 7px 7px;width: 530px;height: 150px;color: #5F6565;border: 1px solid #DFDFDF;}
+      input[type="text"] {float: right;margin: 0 0 5px 0;padding: 7px 7px;width: 96%;color: #5F6565;border: 1px solid #DFDFDF;}
+      textarea {float: right;margin: 0 0 5px 0;padding: 7px 7px;width: 96%;height: 150px;color: #5F6565;border: 1px solid #DFDFDF;}
       input[type='submit'] {float: right;padding: 3px 10px 5px 10px;margin: 10px 0 0 0;color: #fff;font-weight: bold;cursor: pointer;border: none;background: #1B719B;}
       input[type='submit']:hover {background: #009AEF;}
     }
@@ -114,12 +115,14 @@ vars {
 }
 
 /* Styling for the contact form */
-#contact-form {
+.contact-form {
   self {float: left;width: 400px;}
   li {
     self {clear: both;float: left;margin: 0 0 10px 0;width: 100%;}
-    input[type="text"] {float: left;padding: 6px 7px;width: 382px;background: #CFEFFF;border: 1px solid #0986C8;}
-    textarea {float: left;padding: 6px 7px;width: 100%;}
+    input[type="text"] {float: left;padding: 6px 7px;width: 382px;border: 1px solid #0986C8;}
+    input[type="text"]:focus {background: #CFEFFF}
+    textarea {float: left;padding: 6px 7px;width: 100%;border: 1px solid #0986C8;}
+    textarea:focus {background: #CFEFFF}
     select {float: left;padding: 4px 7px;}
     input[type="submit"] {float: left;padding: 4px 7px;background: #dfdfdf;border: 1px solid #ccc;}
   }

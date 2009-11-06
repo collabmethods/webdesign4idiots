@@ -19,6 +19,11 @@
     <h3>User Comments</h3>
     <a href="javascript:void(0)" onclick="Effect.SlideDown('new-comment-form');return true;">make a comment</a>
   </div>
+  <ul class="messages">
+    <?php if (isset($message)): ?>
+      <?php echo $message ?>
+    <?php endif ?>
+  </ul>
   <ul id="new-comment-form" class="comment-list" style="display:none;">
     <li>
       <div class="comment-user">
@@ -27,7 +32,7 @@
         <span><?php echo $row->date ?></span>
       </div>
       <div class="comment-content">
-        <?php echo form_open('blog/make_comment/'.$row->id); ?>
+        <?php echo form_open('comments/submit_comment/'.$row->id); ?>
         <ul class="comment-form-list">
           <li>
             <?php echo form_textarea('message','Your Message...'); ?>
@@ -42,7 +47,7 @@
             <?php echo form_input('url','Your Website'); ?>
           </li>
           <li>
-            <?php echo form_submit('blog/make_comment/'.$row->id,'post comment'); ?>
+            <?php echo form_submit('submit','post comment'); ?>
           </li>
         </ul>
         <?php echo form_close(); ?>

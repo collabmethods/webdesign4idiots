@@ -22,11 +22,12 @@ class Comment extends Model {
     return $count;
   }
 
-  function create_comment()
+  function submit_comment($post_id,$type)
   {
     $comment_data = array(
       'id' => '',
       'post_id' => $post_id,
+      'type' => $type,
       'author' => $this->input->post('full_name'),
       'content' => $this->input->post('message'),
       'date' => date("Y-m-d")

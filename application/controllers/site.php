@@ -10,7 +10,7 @@
     Public function index()
     { 
       $this->load->library('pagination');
-      $config['base_url'] = 'http://localhost.com/webdesign4idiots/index.php/site/index/';
+      $config['base_url'] = 'http://localhost.com/webdesign4idiots/site/index/';
       $config['total_rows'] = $this->master->count_all();
       $config['per_page'] = '4';
       $this->pagination->initialize($config);
@@ -27,16 +27,16 @@
       $this->load->view('includes/template', $data);
     }
     
-    Public function portfolio()
+    Public function freebies()
     {
-      $data['main_content'] = 'portfolio';
+      $data['main_content'] = 'freebies';
       $data['activeNav'] = 'active';
       $this->load->view('includes/template', $data);
     }
     
-    Public function contact()
+    Public function about()
     {
-      $data['main_content'] = 'request';
+      $data['main_content'] = 'about';
       $data['activeNav'] = 'active';
       $this->load->view('includes/template', $data);
     }

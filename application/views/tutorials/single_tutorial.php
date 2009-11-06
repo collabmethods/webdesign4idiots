@@ -27,7 +27,7 @@
         <span><?php echo $row->date ?></span>
       </div>
       <div class="comment-content">
-        <?php echo form_open('comment/create_comment/'.$row->id); ?>
+        <?php echo form_open('comments/submit_tutorial_comment/'.$row->id); ?>
         <ul class="comment-form-list">
           <li>
             <?php echo form_textarea('message','Your Message...'); ?>
@@ -42,7 +42,7 @@
             <?php echo form_input('url','Your Website'); ?>
           </li>
           <li>
-            <?php echo form_submit('blog/make_comment/'.$row->id,'post comment'); ?>
+            <?php echo form_submit('submit','post comment'); ?>
           </li>
         </ul>
         <?php echo form_close(); ?>
