@@ -2,15 +2,10 @@
 
 class Administrator extends Controller {
   
-  function __construct()
+  public function index()
   {
-    parent::Controller();
-  }
-  
-  Public function index()
-  {
-    $data['main_content'] = 'admin/login';
-    $this->load->view('admin/includes/template', $data);
+    $data['main_content'] = 'admin/dashboard';
+    $this->load->view('admin/includes/template',$data);
   }
   
 }

@@ -1,0 +1,102 @@
+#fake-wrapper {
+  margin: 180px auto;
+  width: 555px;
+}
+
+#wrapper {
+  float: left;
+  width: 100%;
+}
+
+.login-container {
+  float: left;
+  padding:0 0 0 32px;
+  width:525px;
+  background:transparent url('../../images/logo.jpg') no-repeat scroll 0 0;
+}
+
+.legal {
+  clear: both;
+  float: left;
+  margin:0;
+  padding:8px 8px 5px;
+  width: 484px;
+  font-size:0.95em;
+}
+
+.login-box {
+  float: left;
+  width: 525px;
+}
+
+.login-box > form {
+  float: left;
+}
+
+.login-form {
+  float: left;
+  padding: 27px 35px 35px;
+  width: 450px;
+  text-align: left;
+  border: 1px solid #dfdfdf;
+}
+
+.login-form h2 {
+  color: #333;
+  font-size:1.7em;
+  font-weight:normal;
+}
+
+.login-form > ul {
+  clear: both;
+  float: left;
+  width: 100%;
+}
+
+.login-form > ul > li {
+  float: left;
+  padding: 0 0 0 10px;
+  width: 210px;
+}
+
+.login-form > ul > li > label {
+  clear: both;
+  float: left;
+  margin: 0 0 2px 0;
+  color: #333;
+  font-weight: bold;
+}
+
+.login-form > ul > li > input[type="text"],
+.login-form > ul > li > input[type="password"] {
+  clear: both;
+  float: left;
+  margin: 0 0 2px 0;
+  padding: 5px 0 5px 5px;
+  width: 200px;
+  color: #333;
+  border: 1px solid #dfdfdf;
+}
+
+.login-form > ul > li.form-buttons {
+  float: left;
+  margin: 15px 0 0 0;
+  padding: 0 0 0 10px;
+  width: 426px !important;
+}
+
+.login-form > ul > li > a {
+  float: left;
+  color: #459BF2;
+  text-decoration: underline;
+}
+
+.login-form > ul > li.form-buttons > input {
+  float: right !important;
+  padding: 2px 8px;
+  color: #fff;
+  font-size: 14px;
+  background: #459BF2;
+  border: none;
+  -moz-border-radius: 3px;
+}
